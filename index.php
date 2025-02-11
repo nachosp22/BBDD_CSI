@@ -1,33 +1,26 @@
-<?php
-// Configuración de la conexión a la base de datos
-$servername = "127.0.0.1:3306"; 
-$username = "u941813118_administrador"; // Tu usuario de la base de datos
-$password = "8l2UEwH@m"; // Tu contraseña de la base de datos
-$dbname = "u941813118_colegio"; // Nombre de la base de datos
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Categorías</title>
+</head>
+<body>
 
-// Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+    <h2>Selecciona una Categoría</h2>
 
-// Comprobar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+    <form method="POST" action="procesar_formulario.php">
+        <label for="categoria">Categoría:</label>
+        <select name="categoria" id="categoria">
+            <option value="Pas">PAS</option>
+            <option value="Monitor">Monitor</option>
+            <option value="Alumno">Alumno</option>
+            <option value="Profesor">Profesor</option>
+            <option value="Practica">Prácticas</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Enviar">
+    </form>
 
-// Realizar una consulta
-$sql = "SELECT nombre, apellido1, apellido2 FROM usuario"; // Cambia esta consulta a la que necesites
-$result = $conn->query($sql);
-
-// Mostrar el resultado
-if ($result->num_rows > 0) {
-    // Si hay resultados, los mostramos en un párrafo
-    echo "<p>Usuarios:</p>";
-    while($row = $result->fetch_assoc()) {
-        echo "<p>" . $row["nombre"] . " " . $row["apellido1"] . " " . $row["apellido2"] . "</p>";
-    }
-} else {
-    echo "<p>No se encontraron resultados.</p>";
-}
-
-// Cerrar la conexión
-$conn->close();
-?>
+</body>
+</html>
