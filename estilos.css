@@ -1,0 +1,14 @@
+.fixed-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px; /* Ajusta el ancho según el de tu menú */
+    overflow-y: auto;
+    background-color: #f8f9fa; /* Color de fondo (ajustar a tu gusto) */
+    z-index: 1000; /* Asegura que el menú se mantenga encima de otros contenidos */
+  }
+
+  .content {
+    margin-left: 300px; /* Deja espacio para el menú fijo */
+  }
