@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
         $conn->query($deleteProfesor);
         $conn->query($deleteMonitor);
         $conn->query($deletePractica);
-        $conn->query($deletePas);  // Ejecutamos eliminación para la tabla PAS
+        $conn->query($deletePas); // Ejecutamos eliminación para la tabla PAS
 
         // Ahora eliminamos al usuario de la tabla principal
         $deleteUsuario = "DELETE FROM usuario WHERE idUsuario = $idUsuario";
@@ -29,7 +29,10 @@ if (isset($_GET['id'])) {
 
         // Si todo sale bien, confirmamos la transacción
         $conn->commit();
-        echo "El usuario ha sido borrado correctamente.";
+
+        // Redirigir al index
+        header("Location: index.php"); // Reemplaza "index.php" con la ruta correcta a tu página index
+        exit(); // Es importante terminar el script después de la redirección
 
     } catch (Exception $e) {
         // Si hay algún error, revertimos la transacción

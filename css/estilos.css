@@ -1,0 +1,124 @@
+ .hidden {
+      display: none;
+    }
+            .sidebar {
+            width: 300px; /* Ancho fijo del sidebar */
+            height: 100vh; /* Altura completa de la ventana */
+            position: fixed; /* Fija el sidebar en su posición */
+            overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+            background-color: #f8f9fa; /* Color de fondo */
+            padding: 20px; /* Espaciado interno */ 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .sidebar form {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    gap: 5px; /* Espacio entre botones */
+}
+
+.button-grid button {
+    width: 100%; /* Ocupan todo el ancho de su celda */
+    display: flex; /* Para centrar el contenido */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos opcionales para el icono y el texto */
+.button-grid svg {
+    margin-right: 5px; /* Espacio entre el icono y el texto */
+}
+    .main-content {
+      margin-left: 300px; /* Margen izquierdo igual al ancho del sidebar */
+      overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+      height: 100vh; /* Altura completa de la ventana */
+      width: calc(100% - 300px); /* Ancho del contenido principal */
+    }
+    .table-container {
+      width: 100%; /* Ocupa el 100% del ancho del contenedor */
+      max-height: 100vh; /* Altura máxima para la tabla */
+      overflow-y: auto; /* Permite scroll si la tabla es muy larga */
+    }
+    .table {
+      width: 100%; /* Ocupa el 100% del ancho del contenedor */
+      table-layout: auto; /* Ajusta automáticamente el ancho de las columnas */
+    }
+    .table th{
+        text-align: center;
+    }
+    .table th, .table td {
+      padding: 2px; /* Reducir el padding al mínimo */
+      white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+      overflow: hidden; /* Oculta el contenido que excede el ancho */
+      text-overflow: ellipsis; /* Muestra puntos suspensivos si el contenido es demasiado largo */
+    }
+    .form-modal label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+}
+
+.form-modal input[type="text"],
+.form-modal input[type="email"],
+.form-modal input[type="password"],
+.form-modal input[type="number"],
+.form-modal input[type="tel"],
+.form-modal input[type="url"],
+.form-modal input[type="search"],
+.form-modal input[type="date"],
+.form-modal input[type="time"],
+.form-modal input[type="datetime-local"],
+.form-modal input[type="month"],
+.form-modal input[type="week"],
+.form-modal textarea,
+.form-modal select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+}
+
+.form-modal input:focus,
+.form-modal textarea:focus,
+.form-modal select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.form-modal input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px; /* Ajusta el padding */
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+}
+
+.form-modal input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.form-group {
+  margin-bottom: 10px; /* Espacio entre grupos de campos */
+}
+
+.form-group label {
+  text-align: left; /* Alinea el texto de la etiqueta a la izquierda */
+}
+.form-control-borderless{
+    background-color: #f2f2f2 !important;
+    
+}
+.form-control-borderless:focus{
+    border: none !important;
+}

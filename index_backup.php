@@ -5,9 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css">
-</head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+            .sidebar {
+            width: 300px; /* Ancho fijo del sidebar */
+            height: 100vh; /* Altura completa de la ventana */
+            position: fixed; /* Fija el sidebar en su posición */
+            overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+            background-color: #f8f9fa; /* Color de fondo */
+            padding: 20px; /* Espaciado interno */ 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .sidebar form {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+            gap: 10px; /* Espaciado entre botones */
+            justify-content: center; /* Centra el contenido */
+            width: 100%;
+        }
+
+        .button-container button {
+            min-width: 100px; /* Mantiene el tamaño de los botones */
+            text-align: center; /* Asegura que el texto esté centrado */
+            width: 100%; /* Ocupa todo el ancho de la celda */
+            height: 40px;
+        }
+    .main-content {
+      margin-left: 300px; /* Margen izquierdo igual al ancho del sidebar */
+      overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+      height: 100vh; /* Altura completa de la ventana */
+      width: calc(100% - 300px); /* Ancho del contenido principal */
+    }
+    .table-container {
+      width: 100%; /* Ocupa el 100% del ancho del contenedor */
+      max-height: 100vh; /* Altura máxima para la tabla */
+      overflow-y: auto; /* Permite scroll si la tabla es muy larga */
+    }
+    .table {
+      width: 100%; /* Ocupa el 100% del ancho del contenedor */
+      table-layout: auto; /* Ajusta automáticamente el ancho de las columnas */
+    }
+    .table th{
+        text-align: center;
+    }
+    .table th, .table td {
+      padding: 2px; /* Reducir el padding al mínimo */
+      white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+      overflow: hidden; /* Oculta el contenido que excede el ancho */
+      text-overflow: ellipsis; /* Muestra puntos suspensivos si el contenido es demasiado largo */
+    }
+    .form-modal label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+}
+
+.form-modal input[type="text"],
+.form-modal input[type="email"],
+.form-modal input[type="password"],
+.form-modal input[type="number"],
+.form-modal input[type="tel"],
+.form-modal input[type="url"],
+.form-modal input[type="search"],
+.form-modal input[type="date"],
+.form-modal input[type="time"],
+.form-modal input[type="datetime-local"],
+.form-modal input[type="month"],
+.form-modal input[type="week"],
+.form-modal textarea,
+.form-modal select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+}
+
+.form-modal input:focus,
+.form-modal textarea:focus,
+.form-modal select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.form-modal input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px; /* Ajusta el padding */
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+}
+
+.form-modal input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.form-group {
+  margin-bottom: 10px; /* Espacio entre grupos de campos */
+}
+
+.form-group label {
+  text-align: left; /* Alinea el texto de la etiqueta a la izquierda */
+}
+.form-control-borderless{
+    background-color: #f2f2f2 !important;
+    
+}
+.form-control-borderless:focus{
+    border: none; !important
+}
+  </style>
+</head>
 <body>
     <!-- Sidebar -->
      <!-- Todos los simbolos de la barra lateral -->
@@ -57,7 +179,6 @@
           </svg>
         </h5>
       </div>
-      <form id="formularioFiltros">
       <!-- Select de categorias -->
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
@@ -102,68 +223,61 @@
           </div>
         </li>
       </ul>
-<div class="mt-3" style="margin-bottom: 5px">  <button type="submit" id="btnFiltrar" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">
-        <svg class="bi pe-none me-2" width="16" height="16" fill="currentColor">
-            <use xlink:href="#reload" />
-        </svg>
-        Actualizar
-    </button>
-</div>
-      </form>
-<div class="button-grid">
-    <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#registroModal">
-        <svg class="bi pe-none me-2" width="16" height="16" fill="currentColor">
-            <use xlink:href="#iconoUser" />
-        </svg>
-        N.Usuario
-    </button>
+<div class="button-container mt-3 gap-2 d-grid">  <button class="btn btn-primary" type="button" onclick="actualizarPagina()">
+    <svg class="bi pe-none" width="16" height="16" fill="currentColor">
+      <use xlink:href="#reload" />  </svg>
+    Actualizar
+  </button>
 
-    <button class="btn btn-warning" type="button" onclick="nuevoAcceso()">
-        <svg class="bi pe-none me-2" width="16" height="16" fill="currentColor">
-            <use xlink:href="#door" />
-        </svg>
-        N.Acceso
-    </button>
-    <button id="descargarExcel" class="btn btn-success">
-        <svg class="bi pe-none me-2" width="16" height="16" fill="currentColor">
-            <use xlink:href="#excel" />
-        </svg>
-        Excel
-    </button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
-        Importar CSV
-    </button>
-</div>
+  <button id="descargarExcel" class="btn btn-success" onclick="descargarExcel()">
+    <svg class="bi pe-none" width="16" height="16" fill="currentColor">
+      <use xlink:href="#excel" />  </svg>
+    Excel
+  </button>
+
+<button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#registroModal">
+    <svg class="bi pe-none" width="16" height="16" fill="currentColor">
+        <use xlink:href="#iconoUser" />  </svg>
+    N.Usuario
+</button>
+
+  <button class="btn btn-warning" type="button" onclick="nuevoAcceso()">
+    <svg class="bi pe-none" width="16" height="16" fill="currentColor">
+      <use xlink:href="#door" />  </svg>
+    N.Acceso
+  </button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+    Importar CSV
+   </button>
 </div>
 </div>
 <!-- Boton con un modal para subir un csv-  -->
-<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="importModalLabel">Importar archivo CSV</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form action="php/insertar_csv.php"  method="post" enctype="multipart/form-data" id="formularioCsv">
-      <div class="modal-body">
-        <p>Suba el archivo CSV</p>
-        <input type="file" name="csv_file" id="file-input" class="file-input__input form-control" accept=".csv" required>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" name="subir" class="btn btn-primary" value="Subir Excel">Importar</button>
-      </form>
-      </div>
-      <div id="mensaje"></div>
+       
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importModalLabel">Importar archivo CSV</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="importar.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="csv_file" accept=".csv" required>
+                    <button type="submit" class="btn btn-primary mt-3">Importar</button>
+                </form>
+                <div id="mensaje"></div>  </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    </div>
     <!-- Main Content -->
     <div class="main-content">
       <div class="table-container">
         <?php
         // Incluir la conexión a la base de datos
-        include 'php/abrir_conexion.php';
+        include 'abrir_conexion.php';
 
         // Verificar si la conexión fue exitosa
         if ($conn->connect_error) {
@@ -236,7 +350,7 @@ LEFT JOIN pas pa ON u.idUsuario = pa.idUsuario;";
                       </button> |
                       
                       <!-- Botón para Borrar (sin cambios) -->
-                      <a href='php/borrar_usuario.php?id=$idUsuario' class='btn btn-danger btn-sm' onclick='return confirm(\"¿Seguro que deseas borrar este usuario?\")'>
+                      <a href='borrar_usuario.php?id=$idUsuario' class='btn btn-danger btn-sm' onclick='return confirm(\"¿Seguro que deseas borrar este usuario?\")'>
                           <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-x' viewBox='0 0 16 16'>
                               <path d='M2.146 2.146a1 1 0 0 1 1.414 0L8 6.586l4.44-4.44a1 1 0 1 1 1.42 1.42L9.414 8l4.44 4.44a1 1 0 1 1-1.42 1.42L8 9.414l-4.44 4.44a1 1 0 1 1-1.414-1.414L6.586 8 2.146 3.56a1 1 0 0 1 0-1.414z'/>
                           </svg> Borrar
@@ -252,7 +366,7 @@ echo "<div class='modal fade form-modal' id='registroModal' tabindex='-1' aria-l
                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
             </div>
             <div class='modal-body'>
-                <form method='POST' action='php/insertar_usuario.php'>
+                <form method='POST' action='insertar_usuario.php'>
                     <div class='mb-3'>
                         <label for='nombre' class='form-label'>Nombre:</label>
                         <input type='text' class='form-control' id='nombre' name='nombre' required>
@@ -437,7 +551,7 @@ echo "<div class='modal fade form-modal' id='editarUsuarioModal" . $idUsuario . 
         <h5 class='modal-title'>Editar Usuario: " . $nombre . " " . $apellidos . "</h5>
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
-      <div class='modal-body'>  <form action='php/editar_usuario.php' method='POST' id='editarForm" . $idUsuario . "'>
+      <div class='modal-body'>  <form action='editar_usuario.php' method='POST' id='editarForm" . $idUsuario . "'>
           <input type='hidden' name='idUsuario' value='" . $idUsuario . "'>
 
           <div class='form-group row'>  <label for='nombre" . $idUsuario . "' class='col-sm-4 col-form-label'>Nombre</label>
@@ -557,6 +671,5 @@ echo "<div class='modal fade form-modal' id='editarUsuarioModal" . $idUsuario . 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
