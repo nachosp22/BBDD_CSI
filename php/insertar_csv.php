@@ -131,7 +131,7 @@ if ($_FILES['csv_file']['error'] !== UPLOAD_ERR_OK) {
                 <?php foreach ($mensajes as $msg) { echo "<li>$msg</li>"; } ?>
             </ul>
         <?php } ?>
-        <a href="index.php" class="back-btn">Volver</a>
+        <a href="../index.php" class="back-btn">Volver</a>
     </div>
 </body>
 </html>

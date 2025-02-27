@@ -39,12 +39,15 @@
     .main-content {
       margin-left: 300px; /* Margen izquierdo igual al ancho del sidebar */
       overflow-y: auto; /* Permite scroll si el contenido es muy largo */
-      height: 100vh; /* Altura completa de la ventana */
+      height: 100%; /* Altura completa de la ventana */
       width: calc(100% - 300px); /* Ancho del contenido principal */
+    }
+    .vistasTablas{
+      height: 8%;  
     }
     .table-container {
       width: 100%; /* Ocupa el 100% del ancho del contenedor */
-      max-height: 100vh; /* Altura máxima para la tabla */
+      height: 92%;
       overflow-y: auto; /* Permite scroll si la tabla es muy larga */
     }
     .table {
@@ -55,7 +58,7 @@
         text-align: center;
     }
     .table th, .table td {
-      padding: 2px; /* Reducir el padding al mínimo */
+      padding: 1px; /* Reducir el padding al mínimo */
       white-space: nowrap; /* Evita que el texto se divida en varias líneas */
       overflow: hidden; /* Oculta el contenido que excede el ancho */
       text-overflow: ellipsis; /* Muestra puntos suspensivos si el contenido es demasiado largo */

@@ -51,7 +51,7 @@ if (isset($_POST['guardar'])) {
                 }
 
                 echo "Datos actualizados con éxito!";
-                header("Location: index.php");
+                header("Location: ../index.php");
                 exit;
             } else {
                 echo "Error al actualizar usuario: " . $conn->error; // Mostrar error específico
