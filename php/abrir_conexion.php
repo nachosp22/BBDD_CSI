@@ -2,7 +2,7 @@
 $servername = "ip server"; 
 $username = "usuario"; 
 $password = "contraseña";
-$dbname = "nombre bbdd";
+$dbname = "nombre base de datos";
 
 // Habilitar reportes de error en mysqli
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
