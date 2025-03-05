@@ -1,8 +1,8 @@
 <?php
-$servername = "127.0.0.1:3306"; 
-$username = "u941813118_administrador"; 
-$password = "8l2UEwH@m";
-$dbname = "u941813118_colegio";
+$servername = "ip server"; 
+$username = "usuario"; 
+$password = "contraseña";
+$dbname = "nombre bbdd";
 
 // Habilitar reportes de error en mysqli
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
